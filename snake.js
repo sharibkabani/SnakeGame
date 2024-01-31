@@ -30,6 +30,9 @@ var gameOverSound = new Audio("Super Mario Bros. - Game Over Sound Effect.mp3");
 var gameOver = false;
 
 window.onload = function() {
+    highScore = parseInt(localStorage.getItem("highScore")) || 0;
+    document.getElementById("highScoreSpan").innerHTML = highScore;
+
     board = document.getElementById("board");
     board.height = blockSize * rows;
     board.width = blockSize * cols;
@@ -46,6 +49,8 @@ function update() {
         if (score > highScore) {
             highScore = score;
             document.getElementById("highScoreSpan").innerHTML = highScore;
+
+            localStorage.setItem("highScore", highScore);
         }
         resetGame();
     }
